@@ -17,12 +17,13 @@ class Crypt: Codable {
     var percent_change_24h: String
 }
 
+
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     
     var crypts: [Crypt] = []
-    
+    var images = ["defaultImage", "downArrow", "upArrow"]
     var coinFullNames = ["Bitcoin", "Ethereum", "Ripple", "Bitcoin Cash", "Cardano"]
     
     var changeValue = ["-9.26",  "-9.26", "-9.26", "-9.26", "-9.26",]
@@ -33,9 +34,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         
-        self.loadData()                        
+        self.loadData()
+        
     }
 
+    
+
+    
+    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return coinFullNames.count
         return self.crypts.count
@@ -54,12 +60,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
         
         cell.fullNameLabel.text = crypt.name
-        cell.priceLabel.text = crypt.price_usd
-        cell.changeLabel.text = crypt.percent_change_24h
+        cell.priceLabel.text = crypt.price_usd + "$"
+        cell.changeLabel.text = crypt.percent_change_24h + "%"
         cell.smallNameLabel.text = crypt.symbol
-//        cell.coinImage.image = UIImage(named: coinFullNames[indexPath.row])
+        cell.coinImage.image = UIImage(named: images[0])
         cell.coinImage.layer.cornerRadius = cell.coinImage.frame.height / 2
+        
 
+//        var changes: Int = Int(crypt.percent_change_24h)!
+//        if changes < 0 {
+//            cell.arrowImage.image = UIImage(named: images[1])
+//            cell.changeLabel.textColor = .red
+//        }
+//        else {
+//            cell.arrowImage.image = UIImage(named: images[2])
+//            cell.changeLabel.textColor = .green
+//        }
         
         
         return cell
@@ -79,7 +95,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let crypts = try decoder.decode([Crypt].self, from: data)
                 
                 self.crypts = crypts
-                
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
