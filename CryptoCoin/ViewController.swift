@@ -33,8 +33,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.loadData()
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = (sender as! CustomTableViewCell)
+        let crypt = self.crypts[tableView.indexPath(for: cell)!.row]
+        segue.destination.title = crypt.name
+    }
     
-    // MARK: - UITableViewDelegate
+    
+    // MARK: - UITableViewDataSource
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.crypts.count
@@ -93,6 +99,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
             }
         }
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
