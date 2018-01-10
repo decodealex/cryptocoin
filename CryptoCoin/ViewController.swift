@@ -29,11 +29,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return coinFullNames.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+        
+    }
+    
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! CustomTableViewCell
         
+        cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
+        
         cell.fullNameLabel.text = coinFullNames[indexPath.row]
         cell.coinImage.image = UIImage(named: coinFullNames[indexPath.row])
+        cell.coinImage.layer.cornerRadius = cell.coinImage.frame.height / 2
         
         return cell
     }
