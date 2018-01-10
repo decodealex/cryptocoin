@@ -13,6 +13,7 @@
 		8437745F2006061A00691C05 /* CryptoCoin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8437745D2006061A00691C05 /* CryptoCoin.xcdatamodeld */; };
 		843774612006061A00691C05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843774602006061A00691C05 /* Assets.xcassets */; };
 		843774642006061A00691C05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843774622006061A00691C05 /* LaunchScreen.storyboard */; };
+		84377470200610D300691C05 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8437746F200610D300691C05 /* CustomTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		843774602006061A00691C05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		843774632006061A00691C05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		843774652006061A00691C05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8437746F200610D300691C05 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				843774622006061A00691C05 /* LaunchScreen.storyboard */,
 				843774652006061A00691C05 /* Info.plist */,
 				8437745D2006061A00691C05 /* CryptoCoin.xcdatamodeld */,
+				8437746F200610D300691C05 /* CustomTableViewCell.swift */,
 			);
 			path = CryptoCoin;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			files = (
 				843774592006061A00691C05 /* ViewController.swift in Sources */,
 				843774572006061A00691C05 /* AppDelegate.swift in Sources */,
+				84377470200610D300691C05 /* CustomTableViewCell.swift in Sources */,
 				8437745F2006061A00691C05 /* CryptoCoin.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
