@@ -7,11 +7,14 @@
 //
 
 import UIKit
-import Foundation
+import Alamofire
 
 class Crypt: Codable {
     var id: String
     var name: String
+    var price_usd: String
+    var symbol: String
+    var percent_change_24h: String
 }
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -51,13 +54,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
         
         cell.fullNameLabel.text = crypt.name
+        cell.priceLabel.text = crypt.price_usd
+        cell.changeLabel.text = crypt.percent_change_24h
+        cell.smallNameLabel.text = crypt.symbol
 //        cell.coinImage.image = UIImage(named: coinFullNames[indexPath.row])
-//        cell.coinImage.layer.cornerRadius = cell.coinImage.frame.height / 2
-//        cell.changeLabel.text
-//        cell.changeLabel.text = changeValue[indexPath.row]
-        
-        
-        cell.changeLabel.textColor = .red
+        cell.coinImage.layer.cornerRadius = cell.coinImage.frame.height / 2
+
         
         
         return cell
@@ -65,15 +67,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func loadData() {
         
-        let url = URL(string: "https://api.coinmarketcap.com/v1/ticker/")!
-//        var requst = URLRequest(url: url)
-//        requst.httpMethod = "GET"
-        
-        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+        Alamofire.request("https://api.coinmarketcap.com/v1/ticker/", method: .get).responseData { (response) in
             
-            print(response)
-            
-            guard let data = data else {
+            guard let data = response.data else {
                 return
             }
             
@@ -91,8 +87,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             } catch {
                 
             }
-        })
-        
+        }
     }
     
 }
