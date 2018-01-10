@@ -89,6 +89,15 @@
                                                 <constraint firstAttribute="bottom" secondItem="GXo-9Y-OR6" secondAttribute="bottom" constant="5" id="rNm-3w-bvJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="arrowImage" destination="Daq-Vd-tXN" id="VEQ-Zd-Ot0"/>
+                                            <outlet property="cellView" destination="GXo-9Y-OR6" id="eja-vJ-sfo"/>
+                                            <outlet property="changeLabel" destination="XxO-K6-4Vr" id="TOm-tc-35W"/>
+                                            <outlet property="coinImage" destination="hFj-ZJ-fEJ" id="ldL-T7-z9H"/>
+                                            <outlet property="fullNameLabel" destination="XqJ-t9-skw" id="HBz-I1-tRf"/>
+                                            <outlet property="priceLabel" destination="4Vt-H7-tAq" id="L1n-yL-mST"/>
+                                            <outlet property="smallNameLabel" destination="lVe-3z-APd" id="P9S-bt-QNl"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
