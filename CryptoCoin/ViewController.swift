@@ -18,7 +18,7 @@ class Crypt: Codable {
 }
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     var crypts: [Crypt] = []
@@ -32,12 +32,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.dataSource = self
         self.loadData()
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = (sender as! CustomTableViewCell)
         let crypt = self.crypts[tableView.indexPath(for: cell)!.row]
         segue.destination.title = crypt.name
     }
+    
     
     
     // MARK: - UITableViewDataSource
@@ -62,28 +63,32 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.coinImage.image = UIImage(named: images[0])
         cell.coinImage.layer.cornerRadius = cell.coinImage.frame.height / 2
         
-
-//        var changes: Int = Int(crypt.percent_change_24h)!
-//        if changes < 0 {
-//            cell.arrowImage.image = UIImage(named: images[1])
-//            cell.changeLabel.textColor = .red
-//        }
-//        else {
-//            cell.arrowImage.image = UIImage(named: images[2])
-//            cell.changeLabel.textColor = .green
-//        }
+        
+        
+        var changes = crypt.percent_change_24h
+        print(changes, "test")
+        var changesInt = Float(changes)
+        print(changesInt, "floatChange")
+        
+        if changesInt! > 0.00 {
+            cell.arrowImage.image = UIImage(named: images[2])
+        }
+        else {
+            cell.arrowImage.image = UIImage(named: images[1])
+            cell.changeLabel.textColor = .red
+        }
         
         
         return cell
     }
-
+    
     
     // MARK: - LoadData
     
     func loadData() {
         
         Alamofire.request("https://api.coinmarketcap.com/v1/ticker/", method: .get).responseData { (response) in
-
+            
             guard let data = response.data else {
                 return
             }
