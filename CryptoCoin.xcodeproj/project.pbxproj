@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		840103A52007763B00A3EA82 /* SingleCoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840103A42007763B00A3EA82 /* SingleCoinViewController.swift */; };
 		843774572006061A00691C05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843774562006061A00691C05 /* AppDelegate.swift */; };
 		843774592006061A00691C05 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843774582006061A00691C05 /* ViewController.swift */; };
 		8437745C2006061A00691C05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8437745A2006061A00691C05 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 		0AC1078D939733E4211064A3 /* Pods-CryptoCoin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CryptoCoin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CryptoCoin/Pods-CryptoCoin.debug.xcconfig"; sourceTree = "<group>"; };
 		2FE6B989AEFC1CB7646F5293 /* Pods-CryptoCoin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CryptoCoin.release.xcconfig"; path = "Pods/Target Support Files/Pods-CryptoCoin/Pods-CryptoCoin.release.xcconfig"; sourceTree = "<group>"; };
 		8384F951FE401691E0770120 /* Pods_CryptoCoin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CryptoCoin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		840103A42007763B00A3EA82 /* SingleCoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCoinViewController.swift; sourceTree = "<group>"; };
 		843774532006061A00691C05 /* CryptoCoin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoCoin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		843774562006061A00691C05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		843774582006061A00691C05 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				843774562006061A00691C05 /* AppDelegate.swift */,
 				843774582006061A00691C05 /* ViewController.swift */,
 				8437745A2006061A00691C05 /* Main.storyboard */,
+				840103A42007763B00A3EA82 /* SingleCoinViewController.swift */,
 				843774602006061A00691C05 /* Assets.xcassets */,
 				843774622006061A00691C05 /* LaunchScreen.storyboard */,
 				843774652006061A00691C05 /* Info.plist */,
@@ -235,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				843774592006061A00691C05 /* ViewController.swift in Sources */,
+				840103A52007763B00A3EA82 /* SingleCoinViewController.swift in Sources */,
 				843774572006061A00691C05 /* AppDelegate.swift in Sources */,
 				84377470200610D300691C05 /* CustomTableViewCell.swift in Sources */,
 				84CCF48A200752B3002E9D71 /* chernovik.swift in Sources */,

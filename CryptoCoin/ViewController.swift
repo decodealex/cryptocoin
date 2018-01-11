@@ -23,6 +23,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var crypts: [Crypt] = []
     var images = ["defaultImage", "downArrow", "upArrow"]
+    var refreshControl = UIRefreshControl()
+    
     
     // MARK: - viewDidLoad
     
@@ -31,13 +33,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         self.loadData()
+        
+        tableView.refreshControl = self.refreshControl
+        
     }
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = (sender as! CustomTableViewCell)
         let crypt = self.crypts[tableView.indexPath(for: cell)!.row]
         segue.destination.title = crypt.name
     }
+    
     
     
     
@@ -73,6 +81,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if changesInt! > 0.00 {
             cell.arrowImage.image = UIImage(named: images[2])
+            cell.changeLabel.textColor = UIColor(displayP3Red: 82.0/255.0, green: 146.0/255.0, blue: 96.0/255.0, alpha: 1)
         }
         else {
             cell.arrowImage.image = UIImage(named: images[1])
