@@ -60,7 +60,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.priceLabel.text = crypt.price_usd + "$"
         cell.changeLabel.text = crypt.percent_change_24h + "%"
         cell.smallNameLabel.text = crypt.symbol
-        cell.coinImage.image = UIImage(named: images[0])
+        
+        cell.coinImage.image = UIImage(named: crypt.symbol) ?? UIImage(named: "defaultImage")
         cell.coinImage.layer.cornerRadius = cell.coinImage.frame.height / 2
         
         
