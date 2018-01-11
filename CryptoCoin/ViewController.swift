@@ -23,7 +23,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var crypts: [Crypt] = []
     var images = ["defaultImage", "downArrow", "upArrow"]
-    var refreshControl = UIRefreshControl()
+//    var refreshControl = UIRefreshControl()
     
     
     // MARK: - viewDidLoad
@@ -33,21 +33,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         self.loadData()
-        
-        tableView.refreshControl = self.refreshControl
-        
+//        refreshControl = UIRefreshControl()
+//        refreshControl.attributedTitle = NSAttributedString(string: "Ща обновлю...")
+//        refreshControl.addTarget(self, action: "refresh", for: UIControlEvents.valueChanged)
+//        tableView.addSubview(refreshControl)
+//    }
+//
+//    func refresh() {
+//        tableView.reloadData()
+//
     }
-    
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = (sender as! CustomTableViewCell)
         let crypt = self.crypts[tableView.indexPath(for: cell)!.row]
         segue.destination.title = crypt.name
     }
-    
-    
-    
     
     // MARK: - UITableViewDataSource
     
@@ -68,15 +69,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.priceLabel.text = crypt.price_usd + "$"
         cell.changeLabel.text = crypt.percent_change_24h + "%"
         cell.smallNameLabel.text = crypt.symbol
-        
         cell.coinImage.image = UIImage(named: crypt.symbol) ?? UIImage(named: "defaultImage")
         cell.coinImage.layer.cornerRadius = cell.coinImage.frame.height / 2
         
-        
-        
-        var changes = crypt.percent_change_24h
+        let changes = crypt.percent_change_24h
         print(changes, "test")
-        var changesInt = Float(changes)
+        let changesInt = Float(changes)
         print(changesInt, "floatChange")
         
         if changesInt! > 0.00 {
@@ -87,11 +85,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.arrowImage.image = UIImage(named: images[1])
             cell.changeLabel.textColor = .red
         }
-        
-        
         return cell
     }
-    
     
     // MARK: - LoadData
     
