@@ -37,12 +37,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         
         self.refreshData()
-        
         self.refreshControl.attributedTitle = NSAttributedString(string: "yeeeeee")
         self.refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         self.tableView.refreshControl = self.refreshControl
         self.refreshControl.layer.zPosition = -1
+        
+        
     }
+    
+    // refreshData
     
     @objc func refreshData() {
         self.loadData {
@@ -84,25 +87,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
         cell.fullNameLabel.text = crypt.name
-//        cell.priceLabel.text = crypt.price_usd + "$"
         cell.changeLabel.text = crypt.percent_change_24h + "%"
         cell.smallNameLabel.text = crypt.symbol
         cell.coinImage.image = UIImage(named: crypt.symbol) ?? UIImage(named: "defaultImage")
         cell.coinImage.layer.cornerRadius = cell.coinImage.frame.height / 2
         cell.changeLabel.layer.cornerRadius = cell.changeLabel.frame.height / 2
-//        cell.changeLabel.leng
+        
+        // actions when refreshControl.isRefreshing
         
         if refreshControl.isRefreshing {
-//            cell.changeLabel.backgroundColor = .green
             cell.changeLabel.layer.borderWidth = 1
             var marginSpace = CGFloat(integerLiteral: 3)
             var insets = UIEdgeInsets(top: marginSpace, left: marginSpace, bottom: marginSpace, right: marginSpace)
             cell.changeLabel.layoutMargins = insets
          
-//            cell.changeLabel.layer.borderColor = UIColor(displayP3Red: 235 / 255, green: 235 / 255, blue: 235 / 255, alpha: 1) as! CGColor
-            let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
+            let when = DispatchTime.now() + 1.5 // change 2 to desired number of seconds
             DispatchQueue.main.asyncAfter(deadline: when) {
-//                cell.changeLabel.backgroundColor = UIColor(displayP3Red: 235 / 255, green: 235 / 255, blue: 235 / 255, alpha: 1)
                 cell.changeLabel.layer.borderWidth = 0
             }
         }
@@ -111,6 +111,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         print(changes, "test")
         let changesInt = Float(changes)
         print(changesInt, "floatChange")
+        
+        // actions when  < 0 changesInt >0
         
         if changesInt! > 0.00 {
             cell.arrowImage.image = UIImage(named: images[2])
