@@ -19,29 +19,38 @@ class Crypt: Codable {
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.delegate = self
+            tableView.dataSource = self
+        }
+    }
     
     var crypts: [Crypt] = []
     var images = ["defaultImage", "downArrow", "upArrow"]
-//    var refreshControl = UIRefreshControl()
+    var refreshControl = UIRefreshControl()
     
     
     // MARK: - viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        self.loadData()
-//        refreshControl = UIRefreshControl()
-//        refreshControl.attributedTitle = NSAttributedString(string: "Ща обновлю...")
-//        refreshControl.addTarget(self, action: "refresh", for: UIControlEvents.valueChanged)
-//        tableView.addSubview(refreshControl)
-//    }
-//
-//    func refresh() {
-//        tableView.reloadData()
-//
+        
+        self.refreshData()
+        
+        self.refreshControl.attributedTitle = NSAttributedString(string: "yeeeeee")
+        self.refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        self.tableView.refreshControl = self.refreshControl
+        self.refreshControl.layer.zPosition = -1
+    }
+    
+    @objc func refreshData() {
+        self.loadData {
+            DispatchQueue.main.async {
+                self.refreshControl.endRefreshing()
+                self.tableView.reloadData()
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -90,7 +99,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // MARK: - LoadData
     
-    func loadData() {
+    func loadData(completion: @escaping(() -> Void)) {
         
         Alamofire.request("https://api.coinmarketcap.com/v1/ticker/", method: .get).responseData { (response) in
             
@@ -103,8 +112,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.crypts = crypts
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    completion()
                 }
-                
+
             } catch {
                 
             }
