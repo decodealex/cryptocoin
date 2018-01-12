@@ -72,14 +72,40 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! CustomTableViewCell
         let crypt = self.crypts[indexPath.row]
+        var priceLimit = crypt.price_usd as NSString
+        if priceLimit.length > 8
+        {
+            cell.priceLabel.text = priceLimit.substring(with: NSRange(location: 0, length: priceLimit.length > 8 ? 8 : priceLimit.length)) + "$"
+        }
+        else
+        {
+            cell.priceLabel.text = crypt.price_usd + "$"
+        }
         
         cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
         cell.fullNameLabel.text = crypt.name
-        cell.priceLabel.text = crypt.price_usd + "$"
+//        cell.priceLabel.text = crypt.price_usd + "$"
         cell.changeLabel.text = crypt.percent_change_24h + "%"
         cell.smallNameLabel.text = crypt.symbol
         cell.coinImage.image = UIImage(named: crypt.symbol) ?? UIImage(named: "defaultImage")
         cell.coinImage.layer.cornerRadius = cell.coinImage.frame.height / 2
+        cell.changeLabel.layer.cornerRadius = cell.changeLabel.frame.height / 2
+//        cell.changeLabel.leng
+        
+        if refreshControl.isRefreshing {
+//            cell.changeLabel.backgroundColor = .green
+            cell.changeLabel.layer.borderWidth = 1
+            var marginSpace = CGFloat(integerLiteral: 3)
+            var insets = UIEdgeInsets(top: marginSpace, left: marginSpace, bottom: marginSpace, right: marginSpace)
+            cell.changeLabel.layoutMargins = insets
+         
+//            cell.changeLabel.layer.borderColor = UIColor(displayP3Red: 235 / 255, green: 235 / 255, blue: 235 / 255, alpha: 1) as! CGColor
+            let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
+            DispatchQueue.main.asyncAfter(deadline: when) {
+//                cell.changeLabel.backgroundColor = UIColor(displayP3Red: 235 / 255, green: 235 / 255, blue: 235 / 255, alpha: 1)
+                cell.changeLabel.layer.borderWidth = 0
+            }
+        }
         
         let changes = crypt.percent_change_24h
         print(changes, "test")
