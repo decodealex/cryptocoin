@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="customCell" rowHeight="100" id="Lc7-PP-XpY" customClass="CustomTableViewCell" customModule="CryptoCoin" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="customCell" rowHeight="100" id="Lc7-PP-XpY" customClass="CustomTableViewCell" customModule="CryptoCoin" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lc7-PP-XpY" id="ehV-rm-wG9">
@@ -155,23 +155,79 @@
             </objects>
             <point key="canvasLocation" x="939.375" y="132.04225352112675"/>
         </scene>
-        <!--View Controller-->
+        <!--Single Coin View Controller-->
         <scene sceneID="sd4-cy-Cuj">
             <objects>
-                <viewController id="5cT-UA-qJZ" sceneMemberID="viewController">
+                <viewController id="5cT-UA-qJZ" customClass="SingleCoinViewController" customModule="CryptoCoin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A5Q-JP-rIb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" restorationIdentifier="singleCoinImage" image="mrBurns" translatesAutoresizingMaskIntoConstraints="NO" id="ypO-4X-jkv" userLabel="SingleCoinImageView">
-                                <rect key="frame" x="0.0" y="64" width="320" height="441"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BTC" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1SX-xM-kmj">
+                                <rect key="frame" x="85" y="70" width="150" height="150"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="441" id="Wju-CL-DoC"/>
-                                    <constraint firstAttribute="width" constant="320" id="cqR-sH-6Ut"/>
+                                    <constraint firstAttribute="width" constant="150" id="IlZ-2l-dPD"/>
+                                    <constraint firstAttribute="height" constant="150" id="OaU-i4-9zQ"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AMd-eV-zDv">
+                                <rect key="frame" x="16" y="261" width="288" height="192"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-0.5%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLy-AR-RhI">
+                                        <rect key="frame" x="101" y="8" width="86" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-0.5%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCK-8c-jMR">
+                                        <rect key="frame" x="202" y="8" width="86" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-0.5%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAZ-qB-SWt">
+                                        <rect key="frame" x="0.0" y="8" width="86" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1h" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VL7-ba-vIo">
+                                        <rect key="frame" x="0.0" y="15" width="23" height="17"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="24h" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5w-Tj-ISL">
+                                        <rect key="frame" x="101" y="15" width="23" height="17"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="7d" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTl-SK-l4w">
+                                        <rect key="frame" x="202" y="15" width="23" height="17"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="DSp-p7-wyB" firstAttribute="trailing" secondItem="AMd-eV-zDv" secondAttribute="trailing" constant="16" id="3Pp-uE-J05"/>
+                            <constraint firstItem="AMd-eV-zDv" firstAttribute="top" secondItem="1SX-xM-kmj" secondAttribute="bottom" constant="14" id="HyF-hG-4M9"/>
+                            <constraint firstItem="DSp-p7-wyB" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1SX-xM-kmj" secondAttribute="trailing" constant="85" id="IlE-Im-Zqz"/>
+                            <constraint firstItem="1SX-xM-kmj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DSp-p7-wyB" secondAttribute="leading" constant="85" id="kJL-l9-nhE"/>
+                            <constraint firstItem="1SX-xM-kmj" firstAttribute="top" secondItem="DSp-p7-wyB" secondAttribute="top" constant="6" id="mGI-Ev-zgv"/>
+                            <constraint firstItem="AMd-eV-zDv" firstAttribute="leading" secondItem="DSp-p7-wyB" secondAttribute="leading" constant="16" id="wJg-Dz-DHV"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="DSp-p7-wyB"/>
                     </view>
                 </viewController>
@@ -199,8 +255,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BTC" width="300" height="300"/>
         <image name="defaultImage" width="75" height="75"/>
-        <image name="mrBurns" width="550" height="960"/>
         <image name="upArrow" width="75" height="75"/>
     </resources>
 </document>

@@ -9,14 +9,7 @@
 import UIKit
 import Alamofire
 
-class Crypt: Codable {
-    var id: String
-    var name: String
-    var price_usd: String
-    var symbol: String
-    var percent_change_24h: String
-}
-
+//CoinsViewController
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView! {
@@ -37,7 +30,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         
         self.refreshData()
-        self.refreshControl.attributedTitle = NSAttributedString(string: "yeeeeee")
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
         self.refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         self.tableView.refreshControl = self.refreshControl
         self.refreshControl.layer.zPosition = -1
@@ -73,32 +66,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! CustomTableViewCell
         let crypt = self.crypts[indexPath.row]
-        var priceLimit = crypt.price_usd as NSString
-        if priceLimit.length > 8
-        {
-            cell.priceLabel.text = priceLimit.substring(with: NSRange(location: 0, length: priceLimit.length > 8 ? 8 : priceLimit.length)) + "$"
-        }
-        else
-        {
-            cell.priceLabel.text = crypt.price_usd + "$"
-        }
-        
-        cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
-        cell.fullNameLabel.text = crypt.name
-        cell.changeLabel.text = crypt.percent_change_24h + "%"
-        cell.smallNameLabel.text = crypt.symbol
-        cell.coinImage.image = UIImage(named: crypt.symbol) ?? UIImage(named: "defaultImage")
-        cell.coinImage.layer.cornerRadius = cell.coinImage.frame.height / 2
-        cell.changeLabel.layer.cornerRadius = cell.changeLabel.frame.height / 2
+
+        cell.configure(withModel: crypt)
         
         // actions when refreshControl.isRefreshing
         
         if refreshControl.isRefreshing {
             cell.changeLabel.layer.borderWidth = 1
-            var marginSpace = CGFloat(integerLiteral: 3)
-            var insets = UIEdgeInsets(top: marginSpace, left: marginSpace, bottom: marginSpace, right: marginSpace)
+            let marginSpace = CGFloat(integerLiteral: 3)
+            let insets = UIEdgeInsets(top: marginSpace, left: marginSpace, bottom: marginSpace, right: marginSpace)
             cell.changeLabel.layoutMargins = insets
          
             let when = DispatchTime.now() + 1.5 // change 2 to desired number of seconds
@@ -107,19 +86,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
         
-        let changes = crypt.percent_change_24h
+        var changes = crypt.percent_change_24h
         print(changes, "test")
-        let changesInt = Float(changes)
+        var changesInt = Float(changes)
         print(changesInt, "floatChange")
         
         // actions when  < 0 changesInt >0
         
-        if changesInt! > 0.00 {
-            cell.arrowImage.image = UIImage(named: images[2])
+        if changesInt! > 0.00 {            
+            cell.arrowImage.image = UIImage(named: "upArrow")
             cell.changeLabel.textColor = UIColor(displayP3Red: 82.0/255.0, green: 146.0/255.0, blue: 96.0/255.0, alpha: 1)
         }
         else {
-            cell.arrowImage.image = UIImage(named: images[1])
+            cell.arrowImage.image = UIImage(named: "downArrow")
             cell.changeLabel.textColor = .red
         }
         return cell
@@ -129,7 +108,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadData(completion: @escaping(() -> Void)) {
         
-        Alamofire.request("https://api.coinmarketcap.com/v1/ticker/", method: .get).responseData { (response) in
+        Alamofire.request("https://api.coinmarketcap.com/v1/ticker", method: .get).responseData { (response) in
             
             guard let data = response.data else {
                 return

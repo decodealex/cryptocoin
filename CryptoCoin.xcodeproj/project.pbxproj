@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		840103A52007763B00A3EA82 /* SingleCoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840103A42007763B00A3EA82 /* SingleCoinViewController.swift */; };
+		84053E56200DE3DB00F4BE1F /* Crypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84053E55200DE3DB00F4BE1F /* Crypt.swift */; };
 		843774572006061A00691C05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843774562006061A00691C05 /* AppDelegate.swift */; };
 		843774592006061A00691C05 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843774582006061A00691C05 /* ViewController.swift */; };
 		8437745C2006061A00691C05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8437745A2006061A00691C05 /* Main.storyboard */; };
@@ -23,7 +23,7 @@
 		0AC1078D939733E4211064A3 /* Pods-CryptoCoin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CryptoCoin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CryptoCoin/Pods-CryptoCoin.debug.xcconfig"; sourceTree = "<group>"; };
 		2FE6B989AEFC1CB7646F5293 /* Pods-CryptoCoin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CryptoCoin.release.xcconfig"; path = "Pods/Target Support Files/Pods-CryptoCoin/Pods-CryptoCoin.release.xcconfig"; sourceTree = "<group>"; };
 		8384F951FE401691E0770120 /* Pods_CryptoCoin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CryptoCoin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		840103A42007763B00A3EA82 /* SingleCoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCoinViewController.swift; sourceTree = "<group>"; };
+		84053E55200DE3DB00F4BE1F /* Crypt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypt.swift; sourceTree = "<group>"; };
 		843774532006061A00691C05 /* CryptoCoin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoCoin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		843774562006061A00691C05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		843774582006061A00691C05 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -57,6 +57,59 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		84053E57200DE41100F4BE1F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				84053E55200DE3DB00F4BE1F /* Crypt.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		84053E58200DE41700F4BE1F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				84053E5B200DE44200F4BE1F /* Cells */,
+				84053E5A200DE43A00F4BE1F /* Storyboards */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		84053E59200DE42200F4BE1F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				843774582006061A00691C05 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		84053E5A200DE43A00F4BE1F /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				8437745A2006061A00691C05 /* Main.storyboard */,
+				843774622006061A00691C05 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		84053E5B200DE44200F4BE1F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8437746F200610D300691C05 /* CustomTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		84053E5C200DE46700F4BE1F /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				843774602006061A00691C05 /* Assets.xcassets */,
+				843774652006061A00691C05 /* Info.plist */,
+				8437745D2006061A00691C05 /* CryptoCoin.xcdatamodeld */,
+				84CCF489200752B3002E9D71 /* chernovik.swift */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
 		8437744A2006061A00691C05 = {
 			isa = PBXGroup;
 			children = (
@@ -79,25 +132,12 @@
 			isa = PBXGroup;
 			children = (
 				843774562006061A00691C05 /* AppDelegate.swift */,
-				843774582006061A00691C05 /* ViewController.swift */,
-				8437745A2006061A00691C05 /* Main.storyboard */,
-				840103A42007763B00A3EA82 /* SingleCoinViewController.swift */,
-				843774602006061A00691C05 /* Assets.xcassets */,
-				843774622006061A00691C05 /* LaunchScreen.storyboard */,
-				843774652006061A00691C05 /* Info.plist */,
-				8437745D2006061A00691C05 /* CryptoCoin.xcdatamodeld */,
-				8437746F200610D300691C05 /* CustomTableViewCell.swift */,
-				84CCF489200752B3002E9D71 /* chernovik.swift */,
-				84CCF48B200752F9002E9D71 /* models */,
+				84053E57200DE41100F4BE1F /* Model */,
+				84053E58200DE41700F4BE1F /* View */,
+				84053E59200DE42200F4BE1F /* Controller */,
+				84053E5C200DE46700F4BE1F /* SupportingFiles */,
 			);
 			path = CryptoCoin;
-			sourceTree = "<group>";
-		};
-		84CCF48B200752F9002E9D71 /* models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = models;
 			sourceTree = "<group>";
 		};
 		E844F245BEEE2DAA08EE9A70 /* Frameworks */ = {
@@ -238,7 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				843774592006061A00691C05 /* ViewController.swift in Sources */,
-				840103A52007763B00A3EA82 /* SingleCoinViewController.swift in Sources */,
+				84053E56200DE3DB00F4BE1F /* Crypt.swift in Sources */,
 				843774572006061A00691C05 /* AppDelegate.swift in Sources */,
 				84377470200610D300691C05 /* CustomTableViewCell.swift in Sources */,
 				84CCF48A200752B3002E9D71 /* chernovik.swift in Sources */,
@@ -382,7 +422,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NL4GU78Y25;
-				INFOPLIST_FILE = CryptoCoin/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/CryptoCoin/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kovalyshyn.alex.CryptoCoin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -398,7 +438,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NL4GU78Y25;
-				INFOPLIST_FILE = CryptoCoin/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/CryptoCoin/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kovalyshyn.alex.CryptoCoin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
