@@ -230,6 +230,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DSp-p7-wyB"/>
                     </view>
+                    <connections>
+                        <outlet property="change1hour" destination="fAZ-qB-SWt" id="LcN-bn-nb2"/>
+                        <outlet property="change24hour" destination="jLy-AR-RhI" id="aGH-2Z-s5s"/>
+                        <outlet property="change7days" destination="oCK-8c-jMR" id="UJR-7P-n2z"/>
+                        <outlet property="singleCoinImage" destination="1SX-xM-kmj" id="Pjv-Pq-2EA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MWT-az-S8B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

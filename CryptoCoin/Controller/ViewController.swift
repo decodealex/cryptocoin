@@ -53,6 +53,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = (sender as! CustomTableViewCell)
         let crypt = self.crypts[tableView.indexPath(for: cell)!.row]
         segue.destination.title = crypt.name
+        let destinationVC = segue.destination as? SingleCoinViewController
+        destinationVC?.coinName = crypt.name
+        
     }
     
     // MARK: - UITableViewDataSource
@@ -79,7 +82,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let marginSpace = CGFloat(integerLiteral: 3)
             let insets = UIEdgeInsets(top: marginSpace, left: marginSpace, bottom: marginSpace, right: marginSpace)
             cell.changeLabel.layoutMargins = insets
-         
+            
             let when = DispatchTime.now() + 1.5 // change 2 to desired number of seconds
             DispatchQueue.main.asyncAfter(deadline: when) {
                 cell.changeLabel.layer.borderWidth = 0
@@ -93,7 +96,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // actions when  < 0 changesInt >0
         
-        if changesInt! > 0.00 {            
+        if changesInt! > 0.00 {
             cell.arrowImage.image = UIImage(named: "upArrow")
             cell.changeLabel.textColor = UIColor(displayP3Red: 82.0/255.0, green: 146.0/255.0, blue: 96.0/255.0, alpha: 1)
         }

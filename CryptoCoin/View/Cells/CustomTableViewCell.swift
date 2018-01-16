@@ -54,5 +54,7 @@ class CustomTableViewCell: UITableViewCell {
         self.coinImage.image = UIImage(named: crypt.symbol) ?? UIImage(named: "defaultImage")
         self.coinImage.layer.cornerRadius = self.coinImage.frame.height / 2
         self.changeLabel.layer.cornerRadius = self.changeLabel.frame.height / 2
+        
+        
     }
 }
