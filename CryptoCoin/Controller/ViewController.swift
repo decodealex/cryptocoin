@@ -111,7 +111,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadData(completion: @escaping(() -> Void)) {
         
-        Alamofire.request("https://api.coinmarketcap.com/v1/ticker", method: .get).responseData { (response) in
+        Alamofire.request("https://api.coinmarketcap.com/v1/ticker/?limit=10", method: .get).responseData { (response) in
             
             guard let data = response.data else {
                 return
@@ -119,6 +119,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             do {
                 let decoder = JSONDecoder()
                 let crypts = try decoder.decode([Crypt].self, from: data)
+                print(crypts)
                 self.crypts = crypts
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
