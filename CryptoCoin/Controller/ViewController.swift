@@ -34,10 +34,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         self.tableView.refreshControl = self.refreshControl
         self.refreshControl.layer.zPosition = -1
-//        let backgroundImage = UIImage(named: "background")
-//        view.backgroundColor = UIColor.init(patternImage: backgroundImage!)
-////        tableView.backgroundColor = UIColor.init(patternImage: backgroundImage!)
-//        tableView.backgroundView = view
+        var nib = UINib(nibName: "CustomTableViewCell", bundle: nil)
+        self.tableView .register(nib, forCellReuseIdentifier: "customCell")
         
     }
     
@@ -53,8 +51,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let cell = (sender as! CustomTableViewCell)
-        let crypt = self.crypts[tableView.indexPath(for: cell)!.row]
+//        let cell = (sender as! CustomTableViewCell)
+//        let crypt = self.crypts[tableView.indexPath(for: cell)!.row]
+        let crypt = sender as! Crypt
         segue.destination.title = crypt.name
         let destinationVC = segue.destination as? SingleCoinViewController
         destinationVC?.coinName = crypt.name
@@ -138,7 +137,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
+//        print(indexPath)
+        let crypt = self.crypts[indexPath.row]        
+        self.performSegue(withIdentifier: "toSingleCoinViewController", sender: crypt)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
