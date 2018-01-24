@@ -32,7 +32,8 @@ class SingleCoinViewController: UIViewController, UITableViewDataSource, UITable
             }
     }
     var singleCoinData: [SingleCoin] = []
-    var coinName: String = ""
+    var coinTitleName = ""
+    
     var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
@@ -75,7 +76,7 @@ class SingleCoinViewController: UIViewController, UITableViewDataSource, UITable
     
     func loadData(completion: @escaping(() -> Void)) {
         
-        Alamofire.request("https://api.coinmarketcap.com/v1/ticker/\(coinName)/", method: .get).responseData { (response) in
+        Alamofire.request("https://api.coinmarketcap.com/v1/ticker/\(coinTitleName)/", method: .get).responseData { (response) in
             
             guard let data = response.data else {
                 return
