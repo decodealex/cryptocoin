@@ -11,6 +11,20 @@ import Alamofire
 
 class SingleCoinViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
    
+    @IBOutlet weak var coinImage: UIImageView!
+    @IBOutlet weak var coinPrice: UILabel!
+    @IBOutlet weak var coinTitlePrice: UILabel!
+    @IBOutlet weak var coinName: UILabel!
+    @IBOutlet weak var coinSymbol: UILabel!
+    @IBOutlet weak var coinPriceBtc: UILabel!
+    @IBOutlet weak var coin24hVolume: UILabel!
+    @IBOutlet weak var coinMarketCap: UILabel!
+    @IBOutlet weak var coinAvailableSupply: UILabel!
+    @IBOutlet weak var coinTotalSupply: UILabel!
+    @IBOutlet weak var coin1hChange: UILabel!
+    @IBOutlet weak var coin24hChange: UILabel!
+    @IBOutlet weak var coin7dChange: UILabel!
+    
     @IBOutlet weak var singleCoinTableView: UITableView! {
             didSet {
                 singleCoinTableView.delegate = self
