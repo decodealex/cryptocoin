@@ -34,7 +34,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         self.tableView.refreshControl = self.refreshControl
         self.refreshControl.layer.zPosition = -1
-        
+//        let backgroundImage = UIImage(named: "background")
+//        view.backgroundColor = UIColor.init(patternImage: backgroundImage!)
+////        tableView.backgroundColor = UIColor.init(patternImage: backgroundImage!)
+//        tableView.backgroundView = view
         
     }
     
@@ -111,7 +114,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadData(completion: @escaping(() -> Void)) {
         
-        Alamofire.request("https://api.coinmarketcap.com/v1/ticker/?limit=10", method: .get).responseData { (response) in
+        Alamofire.request("https://api.coinmarketcap.com/v1/ticker/", method: .get).responseData { (response) in
             
             guard let data = response.data else {
                 return
