@@ -465,20 +465,6 @@
                             <constraint firstItem="nkb-by-VGw" firstAttribute="leading" secondItem="DSp-p7-wyB" secondAttribute="leading" id="zxK-rY-zzS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DSp-p7-wyB"/>
-                        <connections>
-                            <outlet property="coin1hChange" destination="dQy-h8-gV5" id="Sgf-3H-MTo"/>
-                            <outlet property="coin24hChange" destination="h7b-yi-nah" id="rHn-sh-LMO"/>
-                            <outlet property="coin24hVolume" destination="r4Z-4J-cbT" id="j4M-A1-qHN"/>
-                            <outlet property="coin7dChange" destination="hAj-DO-Qdp" id="RVa-Fp-kr1"/>
-                            <outlet property="coinAvailableSupply" destination="ugf-fo-djW" id="y6r-2n-nKz"/>
-                            <outlet property="coinImage" destination="7Il-o3-Lo7" id="rw3-og-Np2"/>
-                            <outlet property="coinMarketCap" destination="GHr-JF-LFF" id="51H-VR-lrk"/>
-                            <outlet property="coinName" destination="7v6-aK-ABk" id="SX7-QA-nZg"/>
-                            <outlet property="coinPrice" destination="ySn-xj-i5z" id="tAn-h4-LT5"/>
-                            <outlet property="coinPriceBtc" destination="fxX-h9-MHW" id="XB9-fY-aos"/>
-                            <outlet property="coinSymbol" destination="YGn-TG-qes" id="NLA-mh-AtY"/>
-                            <outlet property="coinTotalSupply" destination="amI-yI-EwS" id="huK-UH-Q6o"/>
-                        </connections>
                     </view>
                     <connections>
                         <outlet property="coin1hChange" destination="dQy-h8-gV5" id="zgl-0d-qbu"/>

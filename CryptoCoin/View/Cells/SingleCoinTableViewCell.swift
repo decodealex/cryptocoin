@@ -27,13 +27,13 @@ class SingleCoinTableViewCell: UITableViewCell {
     }
 
     
-    func configure(withModel coin: SingleCoin) {
-        
-        self.oneHourChange.text = coin.percent_change_1h
-        self.oneDayChange.text = coin.percent_change_24h
-        self.sevenDayChange.text = coin.percent_change_7d
-        self.singleCoinImage.image = UIImage(named: coin.symbol) ?? UIImage(named: "defaultImage")
-        
-    }
-    
+//    func configure(withModel coin: SingleCoin) {
+//
+//        self.oneHourChange.text = coin.percent_change_1h
+//        self.oneDayChange.text = coin.percent_change_24h
+//        self.sevenDayChange.text = coin.percent_change_7d
+//        self.singleCoinImage.image = UIImage(named: coin.symbol) ?? UIImage(named: "defaultImage")
+//
+//    }
+//
 }

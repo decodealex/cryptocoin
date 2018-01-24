@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class SingleCoinViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SingleCoinViewController: UIViewController {
    
     @IBOutlet weak var coinImage: UIImageView!
     @IBOutlet weak var coinPrice: UILabel!
@@ -25,77 +25,76 @@ class SingleCoinViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var coin24hChange: UILabel!
     @IBOutlet weak var coin7dChange: UILabel!
     
-    @IBOutlet weak var singleCoinTableView: UITableView! {
-            didSet {
-                singleCoinTableView.delegate = self
-                singleCoinTableView.dataSource = self
-            }
-    }
-    var singleCoinData: [SingleCoin] = []
+//    @IBOutlet weak var singleCoinTableView: UITableView! {
+//            didSet {
+//                singleCoinTableView.delegate = self
+//                singleCoinTableView.dataSource = self
+//            }
+//    }
+//    var singleCoinData: [SingleCoin] = []
     var coinTitleName = ""
+//    var refreshControl = UIRefreshControl()
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
     
-    var refreshControl = UIRefreshControl()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.refreshData()
+//        self.refreshData()
         // Do any additional setup after loading the view.
-    }
+//    }
     
     
     // refreshData
     
-    @objc func refreshData() {
-        self.loadData {
-            self.singleCoinTableView.reloadData()
-            self.refreshControl.endRefreshing()
-            self.singleCoinTableView.reloadData()
-        }
-    }
+//    @objc func refreshData() {
+//        self.loadData {
+//            self.singleCoinTableView.reloadData()
+//            self.refreshControl.endRefreshing()
+//            self.singleCoinTableView.reloadData()
+//        }
+//    }
     
     // MARK: - UITableViewDataSource
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.singleCoinData.count
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 500
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "sigleCoinCell") as! SingleCoinTableViewCell
-        let coin = self.singleCoinData[indexPath.row]
-        cell.configure(withModel: coin)
-        
-        return cell
-    }
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return self.singleCoinData.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 500
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "sigleCoinCell") as! SingleCoinTableViewCell
+//        let coin = self.singleCoinData[indexPath.row]
+//        cell.configure(withModel: coin)
+//
+//        return cell
+//    }
 
     // MARK: - LoadData
-    
-    func loadData(completion: @escaping(() -> Void)) {
-        
-        Alamofire.request("https://api.coinmarketcap.com/v1/ticker/\(coinTitleName)/", method: .get).responseData { (response) in
-            
-            guard let data = response.data else {
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                let singleCoinData = try decoder.decode([SingleCoin].self, from: data)
-                self.singleCoinData = singleCoinData
-                
-                DispatchQueue.main.async {
-                    completion()
-                }
-                
-            } catch {
-                
-            }
-        }
-    }
+//
+//    func loadData(completion: @escaping(() -> Void)) {
+//
+//        Alamofire.request("https://api.coinmarketcap.com/v1/ticker/\(coinTitleName)/", method: .get).responseData { (response) in
+//
+//            guard let data = response.data else {
+//                return
+//            }
+//
+//            do {
+//                let decoder = JSONDecoder()
+//                let singleCoinData = try decoder.decode([SingleCoin].self, from: data)
+//                self.singleCoinData = singleCoinData
+//
+//                DispatchQueue.main.async {
+//                    completion()
+//                }
+//
+//            } catch {
+//
+//            }
+//        }
+//    }
 
 }
 
