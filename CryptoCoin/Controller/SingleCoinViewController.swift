@@ -30,34 +30,47 @@ class SingleCoinViewController: UIViewController {
         super.viewDidLoad()
         
         print("Coin ID is: \(idSingleCoin)")
+       
         
         self.loadData { (singleCoin) in
             self.coinImage.image = UIImage(named: singleCoin.symbol) ?? UIImage(named: "defaultImage")
             self.coinTitlePriceLabel.text = singleCoin.price_usd + " $"
+            print(singleCoin.price_usd)
             self.coinPriceLabel.text = singleCoin.price_usd + " $"
             self.coinNameLabel.text = singleCoin.name
+            print(singleCoin.name)
             self.coinSymbolLabel.text = singleCoin.symbol
+            print(singleCoin.symbol)
             self.coinPriceBtcLabel.text = singleCoin.price_btc + " ฿"
+            print(self.coinPriceBtcLabel.text)
             self.coin24hVolumeLabel.text = singleCoin.volume_usd + " $"
+            print(self.coin24hVolumeLabel.text)
             self.coinMarketCapLabel.text = singleCoin.market_cap_usd + " $"
+            print(self.coinMarketCapLabel.text)
             self.coinAvailableSupplyLabel.text = singleCoin.available_supply
+            print(self.coinAvailableSupplyLabel.text)
             self.coinTotalSupplyLabel.text = singleCoin.max_supply
+            print(self.coinTotalSupplyLabel.text)
             self.coin1hChangeLabel.text = singleCoin.percent_change_1h + " %"
+            print(self.coin1hChangeLabel.text)
             self.coin24hChangeLabel.text = singleCoin.percent_change_24h + " %"
+            print(self.coin24hChangeLabel.text)
             self.coin7dChangeLabel.text = singleCoin.percent_change_7d + " %"
+            print(self.coin7dChangeLabel.text)
+            print(singleCoin.percent_change_7d)
         }
     }
     
     var coinTitleName = ""
 
-
+  
 
     // MARK: - LoadData
     
     func loadData(completion: @escaping((SingleCoin) -> Void)) {
-//        var idish = ""
-        Alamofire.request("https://api.coinmarketcap.com/v1/ticker/\(idSingleCoin)/", method: .get).responseData { (response) in
-
+//      var api = "https://api.coinmarketcap.com/v1/ticker/\(self.idSingleCoin)/"
+        Alamofire.request("https://api.coinmarketcap.com/v1/ticker/\(self.idSingleCoin)/", method: .get).responseData { (response) in
+//            print(api)
             guard let data = response.data else {
                 return
             }
