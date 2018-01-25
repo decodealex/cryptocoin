@@ -57,11 +57,11 @@
         <scene sceneID="sd4-cy-Cuj">
             <objects>
                 <viewController id="5cT-UA-qJZ" customClass="SingleCoinViewController" customModule="CryptoCoin" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="A5Q-JP-rIb" customClass="Sin">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="view1" id="A5Q-JP-rIb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nkb-by-VGw">
+                            <view contentMode="scaleToFill" restorationIdentifier="view2" translatesAutoresizingMaskIntoConstraints="NO" id="nkb-by-VGw">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BTC" translatesAutoresizingMaskIntoConstraints="NO" id="7Il-o3-Lo7">
@@ -467,19 +467,19 @@
                         <viewLayoutGuide key="safeArea" id="DSp-p7-wyB"/>
                     </view>
                     <connections>
-                        <outlet property="coin1hChange" destination="dQy-h8-gV5" id="zgl-0d-qbu"/>
-                        <outlet property="coin24hChange" destination="h7b-yi-nah" id="nX2-ez-scb"/>
-                        <outlet property="coin24hVolume" destination="r4Z-4J-cbT" id="1sN-vs-UG0"/>
-                        <outlet property="coin7dChange" destination="hAj-DO-Qdp" id="u5X-lE-w07"/>
-                        <outlet property="coinAvailableSupply" destination="ugf-fo-djW" id="lg2-zs-hqI"/>
+                        <outlet property="coin1hChangeLabel" destination="dQy-h8-gV5" id="1pS-AT-3CI"/>
+                        <outlet property="coin24hChangeLabel" destination="h7b-yi-nah" id="6mW-wf-IHB"/>
+                        <outlet property="coin24hVolumeLabel" destination="r4Z-4J-cbT" id="cQI-Ey-8Fw"/>
+                        <outlet property="coin7dChangeLabel" destination="hAj-DO-Qdp" id="qgL-ey-F6w"/>
+                        <outlet property="coinAvailableSupplyLabel" destination="ugf-fo-djW" id="O7M-0T-gon"/>
                         <outlet property="coinImage" destination="7Il-o3-Lo7" id="zna-mn-hbD"/>
-                        <outlet property="coinMarketCap" destination="GHr-JF-LFF" id="imx-Of-0gm"/>
-                        <outlet property="coinName" destination="7v6-aK-ABk" id="Vqu-WH-TQg"/>
-                        <outlet property="coinPrice" destination="2hE-lj-b16" id="Ndf-Oh-ACx"/>
-                        <outlet property="coinPriceBtc" destination="fxX-h9-MHW" id="BiV-f7-Jnp"/>
-                        <outlet property="coinSymbol" destination="YGn-TG-qes" id="ifV-V2-dtL"/>
-                        <outlet property="coinTitlePrice" destination="ySn-xj-i5z" id="Icb-Zv-Q4r"/>
-                        <outlet property="coinTotalSupply" destination="amI-yI-EwS" id="cTz-mV-91T"/>
+                        <outlet property="coinMarketCapLabel" destination="GHr-JF-LFF" id="kEr-DP-uyK"/>
+                        <outlet property="coinNameLabel" destination="7v6-aK-ABk" id="aGl-zB-vOp"/>
+                        <outlet property="coinPriceBtcLabel" destination="fxX-h9-MHW" id="5mc-mh-PCz"/>
+                        <outlet property="coinPriceLabel" destination="2hE-lj-b16" id="Be3-U1-eRT"/>
+                        <outlet property="coinSymbolLabel" destination="YGn-TG-qes" id="VV9-4U-mDK"/>
+                        <outlet property="coinTitlePriceLabel" destination="ySn-xj-i5z" id="O4o-hf-I0z"/>
+                        <outlet property="coinTotalSupplyLabel" destination="amI-yI-EwS" id="ynW-RE-0G8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MWT-az-S8B" userLabel="First Responder" sceneMemberID="firstResponder"/>

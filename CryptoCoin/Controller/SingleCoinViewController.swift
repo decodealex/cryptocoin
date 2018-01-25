@@ -12,89 +12,71 @@ import Alamofire
 class SingleCoinViewController: UIViewController {
    
     @IBOutlet weak var coinImage: UIImageView!
-    @IBOutlet weak var coinPrice: UILabel!
-    @IBOutlet weak var coinTitlePrice: UILabel!
-    @IBOutlet weak var coinName: UILabel!
-    @IBOutlet weak var coinSymbol: UILabel!
-    @IBOutlet weak var coinPriceBtc: UILabel!
-    @IBOutlet weak var coin24hVolume: UILabel!
-    @IBOutlet weak var coinMarketCap: UILabel!
-    @IBOutlet weak var coinAvailableSupply: UILabel!
-    @IBOutlet weak var coinTotalSupply: UILabel!
-    @IBOutlet weak var coin1hChange: UILabel!
-    @IBOutlet weak var coin24hChange: UILabel!
-    @IBOutlet weak var coin7dChange: UILabel!
+    @IBOutlet weak var coinPriceLabel: UILabel!
+    @IBOutlet weak var coinTitlePriceLabel: UILabel!
+    @IBOutlet weak var coinNameLabel: UILabel!
+    @IBOutlet weak var coinSymbolLabel: UILabel!
+    @IBOutlet weak var coinPriceBtcLabel: UILabel!
+    @IBOutlet weak var coin24hVolumeLabel: UILabel!
+    @IBOutlet weak var coinMarketCapLabel: UILabel!
+    @IBOutlet weak var coinAvailableSupplyLabel: UILabel!
+    @IBOutlet weak var coinTotalSupplyLabel: UILabel!
+    @IBOutlet weak var coin1hChangeLabel: UILabel!
+    @IBOutlet weak var coin24hChangeLabel: UILabel!
+    @IBOutlet weak var coin7dChangeLabel: UILabel!
     
-//    @IBOutlet weak var singleCoinTableView: UITableView! {
-//            didSet {
-//                singleCoinTableView.delegate = self
-//                singleCoinTableView.dataSource = self
-//            }
-//    }
-//    var singleCoinData: [SingleCoin] = []
+    var idSingleCoin = ""
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        print("Coin ID is: \(idSingleCoin)")
+        
+        self.loadData { (singleCoin) in
+            self.coinImage.image = UIImage(named: singleCoin.symbol) ?? UIImage(named: "defaultImage")
+            self.coinTitlePriceLabel.text = singleCoin.price_usd + " $"
+            self.coinPriceLabel.text = singleCoin.price_usd + " $"
+            self.coinNameLabel.text = singleCoin.name
+            self.coinSymbolLabel.text = singleCoin.symbol
+            self.coinPriceBtcLabel.text = singleCoin.price_btc + " ฿"
+            self.coin24hVolumeLabel.text = singleCoin.volume_usd + " $"
+            self.coinMarketCapLabel.text = singleCoin.market_cap_usd + " $"
+            self.coinAvailableSupplyLabel.text = singleCoin.available_supply
+            self.coinTotalSupplyLabel.text = singleCoin.max_supply
+            self.coin1hChangeLabel.text = singleCoin.percent_change_1h + " %"
+            self.coin24hChangeLabel.text = singleCoin.percent_change_24h + " %"
+            self.coin7dChangeLabel.text = singleCoin.percent_change_7d + " %"
+        }
+    }
+    
     var coinTitleName = ""
-//    var refreshControl = UIRefreshControl()
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-    
-//        self.refreshData()
-        // Do any additional setup after loading the view.
-//    }
-    
-    
-    // refreshData
-    
-//    @objc func refreshData() {
-//        self.loadData {
-//            self.singleCoinTableView.reloadData()
-//            self.refreshControl.endRefreshing()
-//            self.singleCoinTableView.reloadData()
-//        }
-//    }
-    
-    // MARK: - UITableViewDataSource
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return self.singleCoinData.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 500
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "sigleCoinCell") as! SingleCoinTableViewCell
-//        let coin = self.singleCoinData[indexPath.row]
-//        cell.configure(withModel: coin)
-//
-//        return cell
-//    }
+
+
 
     // MARK: - LoadData
-//
-//    func loadData(completion: @escaping(() -> Void)) {
-//
-//        Alamofire.request("https://api.coinmarketcap.com/v1/ticker/\(coinTitleName)/", method: .get).responseData { (response) in
-//
-//            guard let data = response.data else {
-//                return
-//            }
-//
-//            do {
-//                let decoder = JSONDecoder()
-//                let singleCoinData = try decoder.decode([SingleCoin].self, from: data)
-//                self.singleCoinData = singleCoinData
-//
-//                DispatchQueue.main.async {
-//                    completion()
-//                }
-//
-//            } catch {
-//
-//            }
-//        }
-//    }
+    
+    func loadData(completion: @escaping((SingleCoin) -> Void)) {
+//        var idish = ""
+        Alamofire.request("https://api.coinmarketcap.com/v1/ticker/\(idSingleCoin)/", method: .get).responseData { (response) in
+
+            guard let data = response.data else {
+                return
+            }
+
+            do {
+                
+                let decoder = JSONDecoder()
+                let singleCoinData = try decoder.decode([SingleCoin].self, from: data)
+                if let singleCoin = singleCoinData.first {
+                    DispatchQueue.main.async {
+                        completion(singleCoin)
+                    }
+                }
+
+            } catch {
+
+            }
+        }
+    }
 
 }
 

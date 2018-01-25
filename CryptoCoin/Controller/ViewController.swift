@@ -130,25 +130,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // MARK: - UITableViewDelegate
     
-  var segueToSingleCoinViewController = ""
+//      var segueToSingleCoinViewController = ""
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print(indexPath)
         let crypt = self.crypts[indexPath.row]        
         self.performSegue(withIdentifier: "toSingleCoinViewController", sender: crypt)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-}
-
-
-
-func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //        let cell = (sender as! CustomTableViewCell)
-    //        let crypt = self.crypts[tableView.indexPath(for: cell)!.row]
-    let crypt = sender as! Crypt
-    segue.destination.title = crypt.name
-    let destinationVC = segue.destination as? SingleCoinViewController
-    destinationVC!.coinTitleName = crypt.name
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let singleCoinViewController = segue.destination as? SingleCoinViewController, let crypt = sender as? Crypt {
+            singleCoinViewController.coinTitleName = crypt.name
+            singleCoinViewController.idSingleCoin = crypt.id
+            singleCoinViewController.title = crypt.name
+        }
+    }
 }
+
 
