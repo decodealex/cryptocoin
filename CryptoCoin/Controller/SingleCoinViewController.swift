@@ -58,6 +58,9 @@ class SingleCoinViewController: UIViewController {
             print(self.coin7dChangeLabel.text)
             print(singleCoin.percent_change_7d)
             
+            self.coinImage.clipsToBounds = true
+            self.coinImage.layer.cornerRadius = self.coinImage.frame.height / 2
+            
         }
     }
     
