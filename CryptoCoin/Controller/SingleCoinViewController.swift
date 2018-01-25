@@ -28,7 +28,6 @@ class SingleCoinViewController: UIViewController {
     var idSingleCoin = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         print("Coin ID is: \(idSingleCoin)")
        
         
@@ -58,6 +57,7 @@ class SingleCoinViewController: UIViewController {
             self.coin7dChangeLabel.text = singleCoin.percent_change_7d + " %"
             print(self.coin7dChangeLabel.text)
             print(singleCoin.percent_change_7d)
+            
         }
     }
     
@@ -79,6 +79,7 @@ class SingleCoinViewController: UIViewController {
                 
                 let decoder = JSONDecoder()
                 let singleCoinData = try decoder.decode([SingleCoin].self, from: data)
+//                print("DATA ------------ \(data)")
                 if let singleCoin = singleCoinData.first {
                     DispatchQueue.main.async {
                         completion(singleCoin)

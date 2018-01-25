@@ -20,7 +20,7 @@ class SingleCoin: Codable {
     var percent_change_7d: String
     var market_cap_usd: String
     var available_supply: String
-    var max_supply: String
+    var max_supply: String?
     var volume_usd: String
     
 //    "id": "bitcoin",
@@ -53,9 +53,8 @@ class SingleCoin: Codable {
         self.percent_change_7d = try container.decode(String.self, forKey: .percent_change_7d)
         self.market_cap_usd = try container.decode(String.self, forKey: .market_cap_usd)
         self.available_supply = try container.decode(String.self, forKey: .available_supply)
-        self.max_supply = try container.decode(String.self, forKey: .max_supply)
+        self.max_supply = try? container.decode(String.self, forKey: .max_supply)
         self.volume_usd = try container.decode(String.self, forKey: .volume_usd)
-        
     }
     
     enum CodingKeys: String, CodingKey {
