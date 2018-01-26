@@ -10,7 +10,10 @@ import UIKit
 import Alamofire
 
 class SingleCoinViewController: UIViewController {
-   
+    
+    @IBOutlet weak var coinImageContraint: NSLayoutConstraint!
+    
+    
     @IBOutlet weak var coinImage: UIImageView!
     @IBOutlet weak var coinPriceLabel: UILabel!
     @IBOutlet weak var coinTitlePriceLabel: UILabel!
@@ -29,7 +32,9 @@ class SingleCoinViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Coin ID is: \(idSingleCoin)")
-       
+        
+//        coinImageContraint.constant = 0
+        
         
         self.loadData { (singleCoin) in
             self.coinImage.image = UIImage(named: singleCoin.symbol) ?? UIImage(named: "defaultImage")
@@ -65,35 +70,28 @@ class SingleCoinViewController: UIViewController {
     }
     
     var coinTitleName = ""
-
-  
-
+    
+    
+    
     // MARK: - LoadData
     
     func loadData(completion: @escaping((SingleCoin) -> Void)) {
-//      var api = "https://api.coinmarketcap.com/v1/ticker/\(self.idSingleCoin)/"
         Alamofire.request("https://api.coinmarketcap.com/v1/ticker/\(self.idSingleCoin)/", method: .get).responseData { (response) in
-//            print(api)
             guard let data = response.data else {
                 return
             }
-
             do {
-                
                 let decoder = JSONDecoder()
                 let singleCoinData = try decoder.decode([SingleCoin].self, from: data)
-//                print("DATA ------------ \(data)")
                 if let singleCoin = singleCoinData.first {
                     DispatchQueue.main.async {
                         completion(singleCoin)
                     }
                 }
-
             } catch {
-
             }
         }
     }
-
+    
 }
 

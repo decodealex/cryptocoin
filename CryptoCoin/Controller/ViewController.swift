@@ -12,7 +12,7 @@ import Alamofire
 //CoinsViewController
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
- 
+    
     
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -39,6 +39,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var nib = UINib(nibName: "CustomTableViewCell", bundle: nil)
         self.tableView .register(nib, forCellReuseIdentifier: "customCell")
         
+        
+        //        let logo = UIImage(named: "defaultImage")
+        //        let navigationImage = UIImageView(image: logo)
+        //        self.navigationItem.titleView = navigationImage
+        
+//        
+//        var respond = UIResponder()
+//        CustomTableViewCell.touchesBegan(respond)
+        
+        
     }
     
     // refreshData
@@ -52,7 +62,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-
+    
     
     // MARK: - UITableViewDataSource
     
@@ -68,21 +78,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! CustomTableViewCell
         let crypt = self.crypts[indexPath.row]
-
+        
         cell.configure(withModel: crypt)
         
         // actions when refreshControl.isRefreshing
         
         if refreshControl.isRefreshing {
             cell.changeLabel.layer.borderWidth = 1
+//            cell.changeLabel.layer.backgroundColor = UIColor(displayP3Red: 82.0/255.0, green: 146.0/255.0, blue: 96.0/255.0, alpha: 1) as! CGColor
             let marginSpace = CGFloat(integerLiteral: 3)
             let insets = UIEdgeInsets(top: marginSpace, left: marginSpace, bottom: marginSpace, right: marginSpace)
             cell.changeLabel.layoutMargins = insets
             
-            let when = DispatchTime.now() + 1.5 // change 2 to desired number of seconds
+            let when = DispatchTime.now() + 1.5 // change  to desired number of seconds
             DispatchQueue.main.asyncAfter(deadline: when) {
                 cell.changeLabel.layer.borderWidth = 0
+//                cell.changeLabel.layer.backgroundColor = UIColor(displayP3Red: 12.0/255.0, green: 100.0/255.0, blue: 33.0/255.0, alpha: 1) as! CGColor
+                
             }
+            
         }
         
         var changes = crypt.percent_change_24h
@@ -121,16 +135,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     self.tableView.reloadData()
                     completion()
                 }
-
             } catch {
-                
             }
         }
     }
     
     // MARK: - UITableViewDelegate
-    
-//      var segueToSingleCoinViewController = ""
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let crypt = self.crypts[indexPath.row]        
