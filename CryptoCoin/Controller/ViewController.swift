@@ -24,6 +24,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var crypts: [Crypt] = []
     var images = ["defaultImage", "downArrow", "upArrow"]
     var refreshControl = UIRefreshControl()
+    var filteredCrypts = [Crypt]()
+    
     
     
     // MARK: - viewDidLoad
@@ -38,6 +40,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.refreshControl.layer.zPosition = -1
         var nib = UINib(nibName: "CustomTableViewCell", bundle: nil)
         self.tableView .register(nib, forCellReuseIdentifier: "customCell")
+        
+        searchController.searchResultsUpdater = self as! UISearchResultsUpdating
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Coin"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
         
         
         //        let logo = UIImage(named: "defaultImage")
@@ -67,6 +76,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // MARK: - UITableViewDataSource
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering() {
+            return filteredCrypts.count
+        }
         return self.crypts.count
     }
     
@@ -77,8 +89,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! CustomTableViewCell
-        let crypt = self.crypts[indexPath.row]
-        
+        let crypt: Crypt
+        if isFiltering() {
+            crypt = filteredCrypts[indexPath.row]
+        }
+        else {
+             crypt = self.crypts[indexPath.row]
+        }
         cell.configure(withModel: crypt)
         
         // actions when refreshControl.isRefreshing
@@ -94,9 +111,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             DispatchQueue.main.asyncAfter(deadline: when) {
                 cell.changeLabel.layer.borderWidth = 0
 //                cell.changeLabel.layer.backgroundColor = UIColor(displayP3Red: 12.0/255.0, green: 100.0/255.0, blue: 33.0/255.0, alpha: 1) as! CGColor
-                
             }
-            
         }
         
         var changes = crypt.percent_change_24h
@@ -143,7 +158,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let crypt = self.crypts[indexPath.row]        
+//        let crypt = self.crypts[indexPath.row]
+        let crypt: Crypt
+        if isFiltering() {
+            crypt = filteredCrypts[indexPath.row]
+        }
+        else {
+            crypt = self.crypts[indexPath.row]
+        }
         self.performSegue(withIdentifier: "toSingleCoinViewController", sender: crypt)
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -156,11 +178,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
     
-//    // MARK: - UISearchController
-//    
-//    let searchController = UISearchController(searchResultsController: nil)
-//    
+    func filterContentForSearchText(_ searchText: String) {
+        filteredCrypts = crypts.filter({ (crypt: Crypt) -> Bool in
+            return crypt.name.lowercased().contains(searchText.lowercased())
+        })
+        tableView.reloadData()
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
 }
+
+// MARK: - UISearchController
+
+let searchController = UISearchController(searchResultsController: nil)
+extension ViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController : UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+}
+
 
 
