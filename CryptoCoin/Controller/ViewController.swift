@@ -102,7 +102,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if refreshControl.isRefreshing {
             cell.changeLabel.layer.borderWidth = 1
-//            cell.changeLabel.layer.backgroundColor = UIColor(displayP3Red: 82.0/255.0, green: 146.0/255.0, blue: 96.0/255.0, alpha: 1) as! CGColor
             let marginSpace = CGFloat(integerLiteral: 3)
             let insets = UIEdgeInsets(top: marginSpace, left: marginSpace, bottom: marginSpace, right: marginSpace)
             cell.changeLabel.layoutMargins = insets
@@ -110,7 +109,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let when = DispatchTime.now() + 1.5 // change  to desired number of seconds
             DispatchQueue.main.asyncAfter(deadline: when) {
                 cell.changeLabel.layer.borderWidth = 0
-//                cell.changeLabel.layer.backgroundColor = UIColor(displayP3Red: 12.0/255.0, green: 100.0/255.0, blue: 33.0/255.0, alpha: 1) as! CGColor
             }
         }
         
@@ -131,6 +129,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         return cell
     }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchController.searchBar.endEditing(true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchController.searchBar.endEditing(true)
+    }
+   
     
     // MARK: - LoadData
     
@@ -162,6 +169,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let crypt: Crypt
         if isFiltering() {
             crypt = filteredCrypts[indexPath.row]
+//            searchController.searchBar.endEditing(true)
         }
         else {
             crypt = self.crypts[indexPath.row]
@@ -202,6 +210,8 @@ extension ViewController: UISearchResultsUpdating {
         filterContentForSearchText(searchController.searchBar.text!)
     }
 }
+
+
 
 
 
