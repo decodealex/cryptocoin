@@ -155,6 +155,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             singleCoinViewController.title = crypt.name
         }
     }
+    
+    
+//    // MARK: - UISearchController
+//    
+//    let searchController = UISearchController(searchResultsController: nil)
+//    
 }
 
 
