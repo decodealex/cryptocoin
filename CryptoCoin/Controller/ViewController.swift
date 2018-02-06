@@ -39,7 +39,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView.refreshControl = self.refreshControl
         self.refreshControl.layer.zPosition = -1
         var nib = UINib(nibName: "CustomTableViewCell", bundle: nil)
-        self.tableView .register(nib, forCellReuseIdentifier: "customCell")
+        self.tableView.register(nib, forCellReuseIdentifier: "customCell")
         
         searchController.searchResultsUpdater = self as! UISearchResultsUpdating
         searchController.obscuresBackgroundDuringPresentation = false
@@ -47,6 +47,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
+//        self.tableView.backgroundColor = .red
+//        self.tableView.layer.backgroundColor = UIColor(red: 22/255, green: 54/255, blue: 62/255, alpha: 1)
         
         
         //        let logo = UIImage(named: "defaultImage")

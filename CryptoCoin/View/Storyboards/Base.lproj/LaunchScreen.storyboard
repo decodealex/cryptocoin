@@ -17,13 +17,27 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundLaunch" translatesAutoresizingMaskIntoConstraints="NO" id="Tlx-kO-2NX">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="0.42914312700000001" green="0.95422631499999999" blue="0.63566049359999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Tlx-kO-2NX" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="98d-F0-8bf"/>
+                            <constraint firstItem="Tlx-kO-2NX" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="N5N-2W-CFy"/>
+                            <constraint firstItem="Tlx-kO-2NX" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="YQ0-59-P8N"/>
+                            <constraint firstItem="Tlx-kO-2NX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="l12-oP-nst"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="backgroundLaunch" width="393" height="700"/>
+    </resources>
 </document>
