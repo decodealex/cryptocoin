@@ -60,7 +60,7 @@
             </objects>
             <point key="canvasLocation" x="1336.875" y="132.04225352112675"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Favourite-->
         <scene sceneID="3WU-XC-BqY">
             <objects>
                 <tableViewController id="gvq-dB-3pq" customClass="FavouriteTableViewController" customModule="CryptoCoin" customModuleProvider="target" sceneMemberID="viewController">
@@ -83,7 +83,10 @@
                             <outlet property="delegate" destination="gvq-dB-3pq" id="jYF-aU-9gM"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="jEO-Xh-ZTo"/>
+                    <navigationItem key="navigationItem" title="Favourite" id="jEO-Xh-ZTo"/>
+                    <connections>
+                        <segue destination="5cT-UA-qJZ" kind="show" identifier="toSingleCoinView" id="BgZ-23-RfA"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ahx-VO-5BI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -562,11 +565,11 @@
             </objects>
             <point key="canvasLocation" x="532.5" y="133.09859154929578"/>
         </scene>
-        <!--Root View Controller-->
+        <!--1-->
         <scene sceneID="V2A-xl-B73">
             <objects>
-                <tableViewController id="aof-V1-N1f" customClass="FavouriteTableViewController" customModule="CryptoCoin" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Mta-p9-uWz">
+                <tableViewController id="aof-V1-N1f" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Mta-p9-uWz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -585,7 +588,7 @@
                             <outlet property="delegate" destination="aof-V1-N1f" id="xRk-je-FYz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="gjV-k9-emM"/>
+                    <navigationItem key="navigationItem" title="1" id="gjV-k9-emM"/>
                     <connections>
                         <outlet property="favouriteTableView" destination="Mta-p9-uWz" id="hkA-7O-cWm"/>
                     </connections>
@@ -598,7 +601,7 @@
         <scene sceneID="eCY-6V-25a">
             <objects>
                 <navigationController id="N88-ds-eOl" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="history" id="Zqp-KT-71i"/>
+                    <tabBarItem key="tabBarItem" title="" image="dick" badgeValue="PUSSY" id="Zqp-KT-71i"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4We-oF-tnc">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -632,4 +635,10 @@
             <point key="canvasLocation" x="-278" y="133"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="dick" width="64" height="64"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="BgZ-23-RfA"/>
+    </inferredMetricsTieBreakers>
 </document>

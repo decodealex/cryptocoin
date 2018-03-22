@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import CoreData
 
 class SingleCoinViewController: UIViewController {
     
@@ -28,12 +29,44 @@ class SingleCoinViewController: UIViewController {
     @IBOutlet weak var coin24hChangeLabel: UILabel!
     @IBOutlet weak var coin7dChangeLabel: UILabel!
     
+    
+//    @IBAction func addCoin(_ sender: UIButton) {
+//        let alert = UIAlertController(title: "Perfecto", message: "U add that shit to favourite", preferredStyle: .alert)
+//        //        let saveAction = UIAlertAction(title: "diNahooi", style: .default) {
+//        ////            var symbol = coinSymbolLabel.text
+//        //////            self.save(coinSymbol: symbol)
+//        //        }
+//        
+//        let saveAction = UIAlertAction(title: "Save", style: .default) {
+//            [unowned self] action in
+//            
+//            let coinToSave = self.coinSymbolLabel.text
+//            
+////            self.save(coinSymbol: coinToSave!)
+//            
+//            UserDefaults.standard.set(true, forKey: self.idSingleCoin)
+//            
+//        }
+//        
+//        alert.addAction(saveAction)
+//        present(alert, animated: true)
+//    }
+    
+    
+    
+    
+
+    
+
+    
+    
     var idSingleCoin = ""
+    var addedCoins: [NSManagedObject] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Coin ID is: \(idSingleCoin)")
         
-//        coinImageContraint.constant = 0
+        //        coinImageContraint.constant = 0
         
         
         self.loadData { (singleCoin) in
@@ -66,9 +99,91 @@ class SingleCoinViewController: UIViewController {
             self.coinImage.clipsToBounds = true
             self.coinImage.layer.cornerRadius = self.coinImage.frame.height / 2
             
+//            let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.tapButton))
+//            let removeButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.tapButton))
+//            self.navigationItem.rightBarButtonItem = addButton
+//            if UserDefaults.standard.bool(forKey: self.idSingleCoin) != true {
+//                self.navigationItem.rightBarButtonItem = addButton
+//            } else {
+//                self.navigationItem.rightBarButtonItem = removeButton
+//            }            
         }
+        
+        self.addOrRemoveFavouriteButton()
     }
     
+//    @objc func tapButton() {
+//        let alert = UIAlertController(title: "Perfecto", message: "U add that shit to favourite", preferredStyle: .alert)
+//        let saveAction = UIAlertAction(title: "Save", style: .default) {
+//            [unowned self] action in
+//            //            let coinToSave = self.coinSymbolLabel.text
+//            //            //            self.save(coinSymbol: coinToSave!)
+//            if UserDefaults.standard.bool(forKey: self.idSingleCoin) != true {
+//            UserDefaults.standard.set(true, forKey: self.idSingleCoin)
+//            } else {
+//                UserDefaults.standard.set(false, forKey: self.idSingleCoin)
+//            }
+//        }
+//
+//        alert.addAction(saveAction)
+//        present(alert, animated: true)
+//    }
+    
+    @objc func addButtonAction() {
+//        let alert = UIAlertController(title: "Perfecto", message: "U add that shit to favourite", preferredStyle: .alert)
+//        let saveAction = UIAlertAction(title: "Save", style: .default) {
+//            [unowned self] action in
+//            //            let coinToSave = self.coinSymbolLabel.text
+//            //            //            self.save(coinSymbol: coinToSave!)
+//
+//            UserDefaults.standard.set(true, forKey: self.idSingleCoin)
+//
+//            self.addOrRemoveFavouriteButton()
+//        }
+//
+//        alert.addAction(saveAction)
+//        present(alert, animated: true)
+        UserDefaults.standard.set(true, forKey: self.idSingleCoin)
+        self.addOrRemoveFavouriteButton()
+    }
+    
+    @objc func removeButtonAction() {
+//        let alert = UIAlertController(title: "oh-oh", message: "Delete this coin from favourites?", preferredStyle: .alert)
+//        let saveAction = UIAlertAction(title: "Remove", style: .default) {
+//            [unowned self] action in
+//            //            let coinToSave = self.coinSymbolLabel.text
+//            //            //            self.save(coinSymbol: coinToSave!)
+//
+//            UserDefaults.standard.set(false, forKey: self.idSingleCoin)
+//            self.addOrRemoveFavouriteButton()
+//        }
+//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+//            alert.dismiss(animated: true, completion: nil)
+//        }))
+//        alert.addAction(saveAction)
+//        present(alert, animated: true)
+        UserDefaults.standard.set(false, forKey: self.idSingleCoin)
+        self.addOrRemoveFavouriteButton()
+    }
+    
+    func addOrRemoveFavouriteButton() {
+        
+//        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addButtonAction))
+        let addButton = UIBarButtonItem(image: UIImage(named: "ic_star")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(addButtonAction))
+        
+//        let removeButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.removeButtonAction))
+        let removeButton = UIBarButtonItem(image: UIImage(named: "ic_star_filled")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(removeButtonAction))
+        
+        if UserDefaults.standard.bool(forKey: self.idSingleCoin) != true {
+            self.navigationItem.rightBarButtonItem = addButton
+        } else {
+            self.navigationItem.rightBarButtonItem = removeButton
+            
+        }
+        
+    }
+    
+
     var coinTitleName = ""
     
     

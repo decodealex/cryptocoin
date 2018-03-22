@@ -8,9 +8,10 @@
 
 import UIKit
 import Alamofire
+import CoreData
 
 //CoinsViewController
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, NSFetchedResultsControllerDelegate {
     
     
     
@@ -25,7 +26,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var images = ["defaultImage", "downArrow", "upArrow"]
     var refreshControl = UIRefreshControl()
     var filteredCrypts = [Crypt]()
-    
+    var managedObjectContext: NSManagedObjectContext? = nil
     
     
     // MARK: - viewDidLoad
@@ -33,6 +34,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.crypts = AppStorage.getObject(ofType: [Crypt].self, forKey: "crypts", priority: .permanent) ?? []
+        
+        self.navigationController?.view.backgroundColor = UIColor.white
         self.refreshData()
         self.refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
         self.refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
@@ -59,6 +63,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        var respond = UIResponder()
 //        CustomTableViewCell.touchesBegan(respond)
         
+//
+//        let addButton = UIBarButtonItem(UIBarButtonItemStyle: .add, target: self, action: #selector(insertNewObject(_:)))
+//        navigationItem.rightBarButtonItem = addButton
         
     }
     
@@ -102,17 +109,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // actions when refreshControl.isRefreshing
         
-        if refreshControl.isRefreshing {
-            cell.changeLabel.layer.borderWidth = 1
-            let marginSpace = CGFloat(integerLiteral: 3)
-            let insets = UIEdgeInsets(top: marginSpace, left: marginSpace, bottom: marginSpace, right: marginSpace)
-            cell.changeLabel.layoutMargins = insets
-            
-            let when = DispatchTime.now() + 1.5 // change  to desired number of seconds
-            DispatchQueue.main.asyncAfter(deadline: when) {
-                cell.changeLabel.layer.borderWidth = 0
-            }
-        }
+//        if refreshControl.isRefreshing {
+//            cell.changeLabel.layer.borderWidth = 1
+//            let marginSpace = CGFloat(integerLiteral: 3)
+//            let insets = UIEdgeInsets(top: marginSpace, left: marginSpace, bottom: marginSpace, right: marginSpace)
+//            cell.changeLabel.layoutMargins = insets
+//
+//            let when = DispatchTime.now() + 1.5 // change  to desired number of seconds
+//            DispatchQueue.main.asyncAfter(deadline: when) {
+//                cell.changeLabel.layer.borderWidth = 0
+//            }
+//        }
         
         var changes = crypt.percent_change_24h
         print(changes, "test")
@@ -153,6 +160,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             do {
                 let decoder = JSONDecoder()
                 let crypts = try decoder.decode([Crypt].self, from: data)
+                
+                AppStorage.setObject(crypts, forKey: "crypts", priority: .permanent)
+                
                 print(crypts)
                 self.crypts = crypts
                 DispatchQueue.main.async {
@@ -181,10 +191,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if let singleCoinViewController = segue.destination as? SingleCoinViewController, let crypt = sender as? Crypt {
             singleCoinViewController.coinTitleName = crypt.name
             singleCoinViewController.idSingleCoin = crypt.id
             singleCoinViewController.title = crypt.name
+        }
+        
+        if let favouriteTableViewController = segue.destination as? FavouriteTableViewController {
+            favouriteTableViewController.crypts = self.crypts
         }
     }
     
