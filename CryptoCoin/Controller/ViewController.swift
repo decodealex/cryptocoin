@@ -11,7 +11,18 @@ import Alamofire
 import CoreData
 
 //CoinsViewController
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, NSFetchedResultsControllerDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, NSFetchedResultsControllerDelegate, UIViewControllerPreviewingDelegate {
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        let previewView = storyboard?.instantiateViewController(withIdentifier: "singleCoinView")
+        return previewView
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        let finalView = storyboard?.instantiateViewController(withIdentifier: "singleCoinView")
+        show(finalView!, sender: self)
+    }
+    
     
     
     
@@ -29,10 +40,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var managedObjectContext: NSManagedObjectContext? = nil
     
     
+    
+    
     // MARK: - viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Checking for supporting 3D-touch
+        if traitCollection.forceTouchCapability == UIForceTouchCapability.available {
+            registerForPreviewing(with: self, sourceView: view)
+        }
+        else {
+            print("3D-TOUCH NOT SUPPORTED")
+        }
         
         self.crypts = AppStorage.getObject(ofType: [Crypt].self, forKey: "crypts", priority: .permanent) ?? []
         
