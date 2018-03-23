@@ -14,6 +14,7 @@
 		8437745F2006061A00691C05 /* CryptoCoin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8437745D2006061A00691C05 /* CryptoCoin.xcdatamodeld */; };
 		843774642006061A00691C05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843774622006061A00691C05 /* LaunchScreen.storyboard */; };
 		84377470200610D300691C05 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8437746F200610D300691C05 /* CustomTableViewCell.swift */; };
+		8467B529206550C80008967C /* SingleCoinTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467B528206550C80008967C /* SingleCoinTableViewController.swift */; };
 		8477925A2028B16100951807 /* FavouriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847792592028B16100951807 /* FavouriteTableViewController.swift */; };
 		84A43A3A200E683B0015F8CE /* SingleCoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A43A39200E683B0015F8CE /* SingleCoinViewController.swift */; };
 		84A43A65201620960015F8CE /* SingleCoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A43A64201620960015F8CE /* SingleCoin.swift */; };
@@ -38,6 +39,7 @@
 		843774632006061A00691C05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		843774652006061A00691C05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8437746F200610D300691C05 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		8467B528206550C80008967C /* SingleCoinTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCoinTableViewController.swift; sourceTree = "<group>"; };
 		847792592028B16100951807 /* FavouriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewController.swift; sourceTree = "<group>"; };
 		84A43A39200E683B0015F8CE /* SingleCoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCoinViewController.swift; sourceTree = "<group>"; };
 		84A43A64201620960015F8CE /* SingleCoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCoin.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				843774582006061A00691C05 /* ViewController.swift */,
 				847792592028B16100951807 /* FavouriteTableViewController.swift */,
 				84A43A39200E683B0015F8CE /* SingleCoinViewController.swift */,
+				8467B528206550C80008967C /* SingleCoinTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				84A43A3A200E683B0015F8CE /* SingleCoinViewController.swift in Sources */,
 				843774572006061A00691C05 /* AppDelegate.swift in Sources */,
 				84377470200610D300691C05 /* CustomTableViewCell.swift in Sources */,
+				8467B529206550C80008967C /* SingleCoinTableViewController.swift in Sources */,
 				84CCF48A200752B3002E9D71 /* chernovik.swift in Sources */,
 				84A43A65201620960015F8CE /* SingleCoin.swift in Sources */,
 				8477925A2028B16100951807 /* FavouriteTableViewController.swift in Sources */,

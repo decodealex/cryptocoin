@@ -202,16 +202,16 @@ class FavouriteTableViewController: UITableViewController, UISearchBarDelegate {
             crypt = self.favouriteCrypts[indexPath.row]
 //            crypt = self.testFav[indexPath.row]
         }
-        self.performSegue(withIdentifier: "toSingleCoinView", sender: crypt)
+        self.performSegue(withIdentifier: "toSingleCoinTVC", sender: crypt)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let singleCoinViewController = segue.destination as? SingleCoinViewController, let crypt = sender as? Crypt {
-            singleCoinViewController.coinTitleName = crypt.name
-            singleCoinViewController.idSingleCoin = crypt.id
-            singleCoinViewController.title = crypt.name
+        if let SingleCoinTableViewController = segue.destination as? SingleCoinTableViewController, let crypt = sender as? Crypt {
+            SingleCoinTableViewController.coinTitleName = crypt.name
+            SingleCoinTableViewController.idSingleCoin = crypt.id
+            SingleCoinTableViewController.title = crypt.name
         }
     }
     

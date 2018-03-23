@@ -207,16 +207,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         else {
             crypt = self.crypts[indexPath.row]
         }
-        self.performSegue(withIdentifier: "toSingleCoinViewController", sender: crypt)
+        self.performSegue(withIdentifier: "toSingleCoinViewTableController", sender: crypt)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if let singleCoinViewController = segue.destination as? SingleCoinViewController, let crypt = sender as? Crypt {
-            singleCoinViewController.coinTitleName = crypt.name
-            singleCoinViewController.idSingleCoin = crypt.id
-            singleCoinViewController.title = crypt.name
+        if let SingleCoinTableViewController = segue.destination as? SingleCoinTableViewController, let crypt = sender as? Crypt {
+            SingleCoinTableViewController.coinTitleName = crypt.name
+            SingleCoinTableViewController.idSingleCoin = crypt.id
+            SingleCoinTableViewController.title = crypt.name
         }
         
         if let favouriteTableViewController = segue.destination as? FavouriteTableViewController {
