@@ -9,9 +9,11 @@
 import UIKit
 import Alamofire
 import CoreData
+import ViewAnimator
 
 class FavouriteTableViewController: UITableViewController, UISearchBarDelegate {
     
+    private let animations = [AnimationType.from(direction: .bottom, offset: 60.0)]
     var crypts: [Crypt] = []
 //    var favCrypts: [Crypt] = []
     var favouriteCrypts: [Crypt] {
@@ -41,7 +43,7 @@ class FavouriteTableViewController: UITableViewController, UISearchBarDelegate {
         
         self.tableView.reloadData()
         self.refreshData()
-        self.favRefreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
+//        self.favRefreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
         self.favRefreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         self.tableView.refreshControl = self.favRefreshControl
         self.favRefreshControl.layer.zPosition = -1
@@ -61,16 +63,28 @@ class FavouriteTableViewController: UITableViewController, UISearchBarDelegate {
         self.tableView.reloadData()
     }
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.alpha = 0.2
+        let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
+        cell.layer.transform = transform
+        
+        UIView.animate(withDuration: 0.3) {
+            cell.alpha = 1
+            cell.layer.transform = CATransform3DIdentity
+        }
+    }
+    
     // refreshData
     
     @objc func refreshData() {
+        
         self.loadData {
-            DispatchQueue.main.async {
-                self.favRefreshControl.endRefreshing()
-                self.tableView.reloadData()
-            }
+            self.tableView.reloadData()
+//            self.tableView.animateViews(animations: self.animations)
         }
+        self.refreshControl?.endRefreshing()
     }
+    
     
     
     

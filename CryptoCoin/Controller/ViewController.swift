@@ -9,22 +9,23 @@
 import UIKit
 import Alamofire
 import CoreData
+import ViewAnimator
 
 //CoinsViewController
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, NSFetchedResultsControllerDelegate, UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        let previewView = storyboard?.instantiateViewController(withIdentifier: "singleCoinView")
+        let previewView = storyboard?.instantiateViewController(withIdentifier: "SingleCoinTableView") as! SingleCoinTableViewController
+        let crypt = self.crypts[self.tableView.indexPathForRow(at: location)!.row]
+        previewView.idSingleCoin = crypt.id
+        
         return previewView
     }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        let finalView = storyboard?.instantiateViewController(withIdentifier: "singleCoinView")
+        let finalView = storyboard?.instantiateViewController(withIdentifier: "SingleCoinTableView")
         show(finalView!, sender: self)
     }
-    
-    
-    
     
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -39,14 +40,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var filteredCrypts = [Crypt]()
     var managedObjectContext: NSManagedObjectContext? = nil
     
-    
+    private let animations = [AnimationType.from(direction: .bottom, offset: 100.0)]
     
     
     // MARK: - viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //Checking for supporting 3D-touch
         if traitCollection.forceTouchCapability == UIForceTouchCapability.available {
             registerForPreviewing(with: self, sourceView: view)
@@ -55,50 +55,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             print("3D-TOUCH NOT SUPPORTED")
         }
         
-        self.crypts = AppStorage.getObject(ofType: [Crypt].self, forKey: "crypts", priority: .permanent) ?? []
-        
-        self.navigationController?.view.backgroundColor = UIColor.white
-        self.refreshData()
-        self.refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
-        self.refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        self.tableView.refreshControl = self.refreshControl
-        self.refreshControl.layer.zPosition = -1
-        var nib = UINib(nibName: "CustomTableViewCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: "customCell")
-        
         searchController.searchResultsUpdater = self as! UISearchResultsUpdating
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Coin"
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-//        self.tableView.backgroundColor = .red
-//        self.tableView.layer.backgroundColor = UIColor(red: 22/255, green: 54/255, blue: 62/255, alpha: 1)
         
-        
-        //        let logo = UIImage(named: "defaultImage")
-        //        let navigationImage = UIImageView(image: logo)
-        //        self.navigationItem.titleView = navigationImage
-        
-//        
-//        var respond = UIResponder()
-//        CustomTableViewCell.touchesBegan(respond)
-        
-//
-//        let addButton = UIBarButtonItem(UIBarButtonItemStyle: .add, target: self, action: #selector(insertNewObject(_:)))
-//        navigationItem.rightBarButtonItem = addButton
+        //        self.crypts = AppStorage.getObject(ofType: [Crypt].self, forKey: "crypts", priority: .permanent) ?? []
+        self.navigationController?.view.backgroundColor = UIColor.white
+        self.refreshData()
+        self.refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        self.tableView.refreshControl = self.refreshControl
+        self.refreshControl.layer.zPosition = -1
+        var nib = UINib(nibName: "CustomTableViewCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "customCell")
+       
         
     }
     
     // refreshData
+    var shownIndexPathes: [IndexPath] = []
     
     @objc func refreshData() {
+
+//        self.tableView.isScrollEnabled = false
+//        self.tableView.isScrollEnabled = true
+        
         self.loadData {
-            DispatchQueue.main.async {
-                self.refreshControl.endRefreshing()
-                self.tableView.reloadData()
-            }
+//            self.tableView.animateViews(animations: self.animations)
+//            self.refreshControl.endRefreshing()
+            self.tableView.reloadData()
         }
+//                 self.tableView.animateViews(animations: self.animations)
+                    self.refreshControl.endRefreshing()
+     
     }
     
     
@@ -124,23 +115,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             crypt = filteredCrypts[indexPath.row]
         }
         else {
-             crypt = self.crypts[indexPath.row]
+            crypt = self.crypts[indexPath.row]
         }
         cell.configure(withModel: crypt)
         
         // actions when refreshControl.isRefreshing
         
-//        if refreshControl.isRefreshing {
-//            cell.changeLabel.layer.borderWidth = 1
-//            let marginSpace = CGFloat(integerLiteral: 3)
-//            let insets = UIEdgeInsets(top: marginSpace, left: marginSpace, bottom: marginSpace, right: marginSpace)
-//            cell.changeLabel.layoutMargins = insets
-//
-//            let when = DispatchTime.now() + 1.5 // change  to desired number of seconds
-//            DispatchQueue.main.asyncAfter(deadline: when) {
-//                cell.changeLabel.layer.borderWidth = 0
-//            }
-//        }
+        //        if refreshControl.isRefreshing {
+        //            cell.changeLabel.layer.borderWidth = 1
+        //            let marginSpace = CGFloat(integerLiteral: 3)
+        //            let insets = UIEdgeInsets(top: marginSpace, left: marginSpace, bottom: marginSpace, right: marginSpace)
+        //            cell.changeLabel.layoutMargins = insets
+        //
+        //            let when = DispatchTime.now() + 1.5 // change  to desired number of seconds
+        //            DispatchQueue.main.asyncAfter(deadline: when) {
+        //                cell.changeLabel.layer.borderWidth = 0
+        //            }
+        //        }
         
         var changes = crypt.percent_change_24h
         print(changes, "test")
@@ -160,6 +151,43 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        cell.alpha = 0.2
+//        let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
+//        cell.layer.transform = transform
+//
+//        UIView.animate(withDuration: 0.3) {
+//            cell.alpha = 1
+//            cell.layer.transform = CATransform3DIdentity
+//        }
+//    }
+    
+//    var operationQueue: OperationQueue = {
+//        var operationQueue = OperationQueue()
+//        operationQueue.maxConcurrentOperationCount = 1
+//        return operationQueue
+//    }()
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if self.shownIndexPathes.contains(indexPath) {
+            cell.alpha = 1.0
+        } else {
+
+            self.shownIndexPathes.append(indexPath)
+
+            cell.alpha = 0.2
+            let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
+             cell.layer.transform = transform
+
+            UIView.animate(withDuration: 0.5, animations: {
+                cell.alpha = 1
+                cell.layer.transform = CATransform3DIdentity
+            })
+        }
+    }
+    
+
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         searchController.searchBar.endEditing(true)
     }
@@ -167,7 +195,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchController.searchBar.endEditing(true)
     }
-   
+    
     
     // MARK: - LoadData
     
@@ -187,7 +215,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 print(crypts)
                 self.crypts = crypts
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
                     completion()
                 }
             } catch {
@@ -198,11 +225,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let crypt = self.crypts[indexPath.row]
+        //        let crypt = self.crypts[indexPath.row]
         let crypt: Crypt
         if isFiltering() {
             crypt = filteredCrypts[indexPath.row]
-//            searchController.searchBar.endEditing(true)
+            //            searchController.searchBar.endEditing(true)
         }
         else {
             crypt = self.crypts[indexPath.row]

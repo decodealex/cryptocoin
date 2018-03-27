@@ -10,4 +10,6 @@ target 'CryptoCoin' do
 	pod 'Alamofire', '~> 4.6'
 
 	pod 'Cache', '~> 4.1'
+
+	pod "ViewAnimator"
 end
