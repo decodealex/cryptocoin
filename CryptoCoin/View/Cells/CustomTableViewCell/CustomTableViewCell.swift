@@ -39,6 +39,12 @@ class CustomTableViewCell: UITableViewCell {
 
     func configure(withModel crypt: Crypt) {
         
+//        let priceInt = Int(crypt.price_usd)
+//        let price = priceInt as! NSNumber
+//        let formatter = NumberFormatter()
+//        formatter.numberStyle = .currency
+//        formatter.string(from: price)
+        
         var priceLimit = crypt.price_usd as NSString
         
         if priceLimit.length > 8 {
@@ -56,6 +62,7 @@ class CustomTableViewCell: UITableViewCell {
         self.changeLabel.layer.cornerRadius = self.changeLabel.frame.height / 2
 //        self.cellView.tintColor = .clear
         
+    
         
         
     }
