@@ -70,7 +70,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.refreshControl.layer.zPosition = -1
         var nib = UINib(nibName: "CustomTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "customCell")
-       
+        
         
     }
     
@@ -78,18 +78,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var shownIndexPathes: [IndexPath] = []
     
     @objc func refreshData() {
-
-//        self.tableView.isScrollEnabled = false
-//        self.tableView.isScrollEnabled = true
+        
+        //        self.tableView.isScrollEnabled = false
+        //        self.tableView.isScrollEnabled = true
         
         self.loadData {
-//            self.tableView.animateViews(animations: self.animations)
-//            self.refreshControl.endRefreshing()
+            //            self.tableView.animateViews(animations: self.animations)
+            //            self.refreshControl.endRefreshing()
             self.tableView.reloadData()
         }
-//                 self.tableView.animateViews(animations: self.animations)
-                    self.refreshControl.endRefreshing()
-     
+        //                 self.tableView.animateViews(animations: self.animations)
+        self.refreshControl.endRefreshing()
+        
     }
     
     
@@ -110,13 +110,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! CustomTableViewCell
-        let crypt: Crypt
-        if isFiltering() {
-            crypt = filteredCrypts[indexPath.row]
-        }
-        else {
-            crypt = self.crypts[indexPath.row]
-        }
+
+        let crypt = self.isFiltering()
+            ? self.filteredCrypts[indexPath.row]
+            : self.crypts[indexPath.row]
+        
         cell.configure(withModel: crypt)
         
         // actions when refreshControl.isRefreshing
@@ -139,47 +137,48 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         print(changesInt, "floatChange")
         
         // actions when  < 0 changesInt >0
-        
-        if changesInt! > 0.00 {
-            cell.arrowImage.image = UIImage(named: "upArrow")
-            cell.changeLabel.textColor = UIColor(displayP3Red: 82.0/255.0, green: 146.0/255.0, blue: 96.0/255.0, alpha: 1)
-        }
-        else {
-            cell.arrowImage.image = UIImage(named: "downArrow")
-            cell.changeLabel.textColor = .red
-        }
-        return cell
+
+            if changesInt! > 0.00 {
+                cell.arrowImage.image = UIImage(named: "upArrow")
+                cell.changeLabel.textColor = UIColor(displayP3Red: 82.0/255.0, green: 146.0/255.0, blue: 96.0/255.0, alpha: 1)
+            }
+            else {
+                cell.arrowImage.image = UIImage(named: "downArrow")
+                cell.changeLabel.textColor = .red
+            }
+            return cell
+
     }
     
     
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        cell.alpha = 0.2
-//        let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
-//        cell.layer.transform = transform
-//
-//        UIView.animate(withDuration: 0.3) {
-//            cell.alpha = 1
-//            cell.layer.transform = CATransform3DIdentity
-//        }
-//    }
+    //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    //        cell.alpha = 0.2
+    //        let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
+    //        cell.layer.transform = transform
+    //
+    //        UIView.animate(withDuration: 0.3) {
+    //            cell.alpha = 1
+    //            cell.layer.transform = CATransform3DIdentity
+    //        }
+    //    }
     
-//    var operationQueue: OperationQueue = {
-//        var operationQueue = OperationQueue()
-//        operationQueue.maxConcurrentOperationCount = 1
-//        return operationQueue
-//    }()
+    //    var operationQueue: OperationQueue = {
+    //        var operationQueue = OperationQueue()
+    //        operationQueue.maxConcurrentOperationCount = 1
+    //        return operationQueue
+    //    }()
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if self.shownIndexPathes.contains(indexPath) {
             cell.alpha = 1.0
         } else {
-
+            
             self.shownIndexPathes.append(indexPath)
-
+            
             cell.alpha = 0.2
             let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
-             cell.layer.transform = transform
-
+            cell.layer.transform = transform
+            
             UIView.animate(withDuration: 0.5, animations: {
                 cell.alpha = 1
                 cell.layer.transform = CATransform3DIdentity
@@ -187,7 +186,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-
+    
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         searchController.searchBar.endEditing(true)
     }

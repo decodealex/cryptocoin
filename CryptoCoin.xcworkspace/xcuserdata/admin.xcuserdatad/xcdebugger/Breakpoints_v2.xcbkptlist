@@ -6,11 +6,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoCoin/Controller/ViewController.swift"
-            timestampString = "543856179.820883"
+            timestampString = "543941055.633273"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "85"
@@ -19,29 +19,29 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "CryptoCoin.ViewController.refreshData() -&gt; ()"
                   moduleName = "CryptoCoin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/Developer/CryptoCoin/CryptoCoin/Controller/ViewController.swift"
-                  timestampString = "543763876.436295"
+                  timestampString = "543935960.033114"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "86"
-                  endingLineNumber = "86"
-                  offsetFromSymbolStart = "392">
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "28">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 () -&gt; () in CryptoCoin.ViewController.refreshData() -&gt; ()"
                   moduleName = "CryptoCoin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/Developer/CryptoCoin/CryptoCoin/Controller/ViewController.swift"
-                  timestampString = "543763876.438465"
+                  timestampString = "543935960.035097"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "88"
